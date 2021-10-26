@@ -14,7 +14,7 @@ Jawaban:
 
 1.  Buat topologi seperti dibawah ini
 
-    ![image](/img/1_topologi.png)
+    ![image](/img/1/topologi.png)
 
 2.  Ubah `network configuration` dengan config dibawah ini
 
@@ -88,27 +88,27 @@ Jawaban:
 5.  Cek apakah semua node bisa connect ke internet dengan mengeping google.com
     - Foosha
 
-      ![image](/img/1_cek_ping_Foosha.png)
+      ![image](/img/1/cek_ping_Foosha.png)
 
-    - Longuetown
+    - Loguetown
 
-      ![image](/img/1_cek_ping_Loguetown.png)
+      ![image](/img/1/cek_ping_Loguetown.png)
 
     - Alabasta
 
-      ![image](/img/1_cek_ping_Alabasta.png)
+      ![image](/img/1/cek_ping_Alabasta.png)
 
     - EniesLobby
 
-      ![image](/img/1_cek_ping_EniesLobby.png)
+      ![image](/img/1/cek_ping_EniesLobby.png)
 
     - Water7
 
-      ![image](/img/1_cek_ping_Water7.png)
+      ![image](/img/1/cek_ping_Water7.png)
 
     - Skypie
 
-      ![image](/img/1_cek_ping_Skypie.png) 
+      ![image](/img/1/cek_ping_Skypie.png) 
   
     Bisa dilihat semua node telah terhubung ke internet.
   
@@ -131,26 +131,33 @@ Jawaban:
     ```
 
 3.  Buat folder `kaizoku` di `/etc/bind/` dan copykan file `db.local` di `etc/bind/` ke folder `kaizoku` yang telah dibuat dengan nama `franky.d14.com`
+
     ```
     mkdir /etc/bind/kaizoku
     cp /etc/bind/db.local /etc/bind/kaizoku/franky.d14.com
     ```
 
-4.  Edit file `franky.d14.com` menjadi seperti dibawah ini
+4.  Edit file `franky.d14.com` menjadi seperti dibawah ini 
 
-    ![image](/img/2_franky.d14.com.png)
+    ![image](/img/2/franky.d14.com.png)
     
     Keterangan:
     
     TBD
 
-5.  Buka `Longuetown` dan `Alabasta` dan install **dnsutlis** menggunakan command
+5.  Restart `bind9` menggunakan command
+
+    ```
+    service bind9 restart
+    ```
+
+6.  Buka `Loguetown` dan `Alabasta` dan install **dnsutlis** menggunakan command
     ```
     apt-get update
     apt-get install dnsutils
     ```
 
-6.  Ganti nameserver pada `Longuetown` dan `Alabasta` sehingga menuju ke IP `EniesLobby`, `Water7` dan `Skypie`
+7.  Ganti nameserver pada `Loguetown` dan `Alabasta` sehingga menuju ke IP `EniesLobby`, `Water7` dan `Skypie`
 
     ```
     nameserver 10.28.2.2
@@ -158,39 +165,306 @@ Jawaban:
     nameserver 10.28.2.2
     ```
 
-7.  Cek apakah **franky.d14.com** dan **www.franky.d14.com** sudah bisa diakses menggunakan `ping franky.d14.com`, `host franky.d14.com`, `ping www.franky.d14.com`, dan`host www.franky.d14.com`
+8.  Cek apakah **franky.d14.com** dan **www.franky.d14.com** sudah bisa diakses menggunakan `ping franky.d14.com`, `host franky.d14.com`, `ping www.franky.d14.com`, dan`host www.franky.d14.com`
 
     - Loguetown
 
       cek **franky.d14.com**
 
+      ![image](/img/2/cek_ping_franky_loguetown.png)
 
+      ![image](/img/2/cek_host_franky_loguetown.png)
 
       cek **www.franky.d14.com**
+
+      ![image](/img/2/cek_ping_www_loguetown.png)
+
+      ![image](/img/2/cek_host_www_loguetown.png)
 
     - Alabasta
 
       cek **franky.d14.com**
 
-      ![image](/img/2_cek_ping_franky_alabasta.png)
+      ![image](/img/2/cek_ping_franky_alabasta.png)
 
-      ![image](/img/2_cek_host_franky_alabasta.png)
+      ![image](/img/2/cek_host_franky_alabasta.png)
 
       cek **www.franky.d14.com**
 
-      ![image](/img/2_cek_ping_www_alabasta.png)
+      ![image](/img/2/cek_ping_www_alabasta.png)
 
-      ![image](/img/2_cek_host_www_alabasta.png)
+      ![image](/img/2/cek_host_www_alabasta.png)
 
 **3. Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie**
 
+1.  Buka `EniesLobby` dan tambahkan file config `franky.d14.com` dengan code dibawah
+
+    ```
+    super           IN      A       10.28.2.4
+    www.super       IN      CNAME   super
+    ```
+
+    ![image](/img/3/franky.d14.com.png)
+
+    Keterangan:
+
+    TBD
+
+2.  Restart `bind9` menggunakan command yang sama seperti sebelumnya
+
+3.  Cek apakah **super.franky.d14.com** dan **www.super.franky.d14.com** sudah bisa diakses menggunakan `ping super.franky.d14.com`, `host super.franky.d14.com`, `ping www.super.franky.d14.com`, dan `host www.super.franky.d14.com`
+
+    - Loguetown
+
+      cek **super.franky.d14.com**
+
+      ![image](/img/3/cek_ping_super_loguetown.png)
+
+      ![image](/img/3/cek_host_super_loguetown.png)
+
+      cek **www.super.franky.d14.com**
+
+      ![image](/img/3/cek_ping_www_loguetown.png)
+
+      ![image](/img/3/cek_host_www_loguetown.png)
+
+    - Alabasta
+
+      cek **super.franky.d14.com**
+
+      ![image](/img/3/cek_ping_super_alabasta.png)
+
+      ![image](/img/3/cek_host_super_alabasta.png)
+
+      cek **www.super.franky.d14.com**
+
+      ![image](/img/3/cek_ping_super_alabasta.png)
+
+      ![image](/img/3/cek_host_super_alabasta.png)
+
 **4. Buat juga reverse domain untuk domain utama**
+
+1.  Buka `EniesLobby` dan edit file `named.conf.local` dengan menambahkan code dibawah
+
+    ```
+    zone "2.28.10.in-addr.arpa" {
+      type master;
+      file "/etc/bind/kaizoku/2.28.10.in-addr.arpa";
+    };
+    ```
+2.  Copykan file `db.local` di `etc/bind/` ke folder `kaizoku` dengan nama `2.28.10.in-addr.arpa`
+
+    ```
+    cp /etc/bind/db.local /etc/bind/kaizoku/2.28.10.in-addr.arpa
+    ```
+
+3.  Edit file `2.28.10.in-addr.arpa` menjadi seperti gambar dibawah
+
+    ![image](/img/4/in-addr.png)
+
+4.  Restart `bind9` menggunakan command yang sama seperti sebelumnya
+
+5.  Cek pada client `Loguetown` dan `Alabasta` menggunakan command `host 10.28.2.2`
+
+    - Loguetown
+
+      ![image](/img/4/cek_loguetown.png)
+
+    - Alabasta
+
+      ![image](/img/4/cek_alabasta.png)
 
 **5. Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama**
 
+1.  Buka `EniesLobby` dan edit file `named.conf.local` dan ubah menjadi seperti dibawah
+
+    ```
+    zone "franky.d14.com" {
+        type master;
+        notify yes;
+        also-notify { 10.28.2.3;  };
+        allow-transfer { 10.28.2.3; };
+        file "/etc/bind/kaizoku/franky.d14.com";
+    };
+    ```
+
+    ![image](/img/5/enies_namedlocal.png)
+
+2.  Restart bind9
+
+3.  Buka `Water7` dan install bind9 dengan menggunakan command
+
+    ```
+    apt-get update
+    apt-get install bind9
+    ```
+
+4.  Edit file `named.local.conf` menjadi seperti dibawah
+
+    ![image](/img/5/water7_namedlocal.png)
+
+5.  Restart bind9
+
+6.  Untuk mengecek, matikan terlebih dahulu bind9 pada `EniesLobby` kemudian coba ping **franky.d14.com** melalui `Loguetown` dan/atau `Alabasta`
+
+    ```
+    root@EniesLobby:~# service bind9 stop
+    ```
+
+    - Loguetown
+
+      ![image](/img/5/cek_ping_loguetown.png)
+
+    - Alabasta
+
+      ![image](/img/5/cek_ping_alabasta.png)
+
+
 **6. Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo**
 
+1.  Buka `EniesLobby` dan edit file `franky.d14.com` dengan menambahkan code dibawah
+
+    ```
+    ns1     IN      A       10.28.2.3
+    mecha   IN      NS      ns1
+    ```
+
+    ![image](/img/6/enies_franky.d14.com.png)
+
+2.  Edit file `named.conf.local` menjadi seperti dibawah
+
+    ```
+    zone "franky.d14.com" {
+        type master;
+        allow-transfer { 10.28.2.3; };
+        file "/etc/bind/kaizoku/franky.d14.com";
+    };
+    ```
+
+    ![image](/img/6/enies_named.conf.local.png)
+
+3.  Buka file `named.conf.options` di folder `/etc/bind/`. Comment bagian `dnssec-validation auto` dan tambahkan code `allow-query{any;};`
+
+    ```
+    // dnssec-validation auto;
+
+    allow-query{any;};
+    ```
+
+    ![image](/img/6/enies_named.conf.options.png)
+
+4.  Restart bind9
+
+5.  Buka `Water7`. Edit file `named.conf.local` dengan menambahkan code dibawah
+
+    ```
+    zone "mecha.franky.d14.com" {
+    type master;
+    file "/etc/bind/sunnygo/mecha.franky.d14.com";
+    };
+    ```
+
+    ![image](/img/6/water7_named.conf.local.png)
+
+6.  Buka file `named.conf.options`. Comment bagian `dnssec-validation auto` dan tambahkan code `allow-query{any;};`
+
+    ```
+    // dnssec-validation auto;
+
+    allow-query{any;};
+    ```
+
+    ![image](/img/6/water7_named.conf.options.png)
+
+7.  Restart bind9
+
+8.  Buat folder dengan nama `sunnygo` pada `/etc/bind/` dan copykan file `db.local` ke folder yang baru dibuat dengan nama `mecha.franky.d14.com`
+
+    ```
+    mkdir /etc/bind/sunnygo
+    cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d14.com
+    ```
+
+9.  Buka file `mecha.franky.d14.com` dan ubah menjadi seperti dibawah
+
+    ![image](/img/6/water7_mecha.franky.d14.com.png)
+
+10. Restart bind9
+
+11. Cek apakah `mecha.franky.d14.com` dan `www.mecha.franky.d14.com` bisa pada `Loguetown` dan `Alabasta`
+
+    - Loguetown
+
+      cek **mecha.franky.d14.com**
+
+      ![image](/img/6/cek_ping_mecha_loguetown.png)
+
+      ![image](/img/6/cek_host_mecha_loguetown.png)
+
+      cek **www.mecha.franky.d14.com**
+
+      ![image](/img/6/cek_ping_www_loguetown.png)
+
+      ![image](/img/6/cek_host_www_loguetown.png)
+
+    - Alabasta
+
+      cek **mecha.franky.d14.com**
+
+      ![image](/img/6/cek_ping_mecha_alabasta.png)
+
+      ![image](/img/6/cek_host_mecha_alabasta.png)
+
+      cek **www.mecha.franky.d14.com**
+
+      ![image](/img/6/cek_ping_www_alabasta.png)
+
+      ![image](/img/6/cek_host_www_alabasta.png)
+
 **7. Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie**
+
+1.  Buka `Water7` dan edit file `mecha.franky.d14.com` dengan menambahkan code dibawah
+
+    ```
+    general IN      A       10.28.2.4
+    www.general     IN      CNAME   general
+    ```
+
+    ![image](/img/7/water7_mecha.franky.d14.com.png)
+
+2.  Restart bind9
+
+3.  Buka `EniesLobby` dan restart bind9
+
+4.  Cek apakah `general.mecha.franky.d14.com` dan `www.general.mecha.franky.d14.com` bisa pada `Loguetown` dan `Alabasta`
+
+    - Loguetown
+
+      cek **general.mecha.franky.d14.com**
+
+      ![image](/img/7/cek_ping_general_loguetown.png)
+
+      ![image](/img/7/cek_host_general_loguetown.png)
+
+      cek **www.general.mecha.franky.d14.com**
+
+      ![image](/img/7/cek_ping_www_loguetown.png)
+
+      ![image](/img/7/cek_host_www_loguetown.png)
+
+    - Alabasta
+
+      cek **general.mecha.franky.d14.com**
+
+      ![image](/img/7/cek_ping_general_alabasta.png)
+
+      ![image](/img/7/cek_host_general_alabasta.png)
+
+      cek **www.general.mecha.franky.d14.com**
+
+      ![image](/img/7/cek_ping_www_alabasta.png)
+
+      ![image](/img/7/cek_host_www_alabasta.png)
 
 **8. Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com**
 
