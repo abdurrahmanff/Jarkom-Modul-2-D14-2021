@@ -4,7 +4,7 @@ Lapres Modul 2 Jaringan Komputer
 
 ##  Nama anggota kelompok
 1.  A. Zidan Abdillah Majid (05111940000070)
-2.  liffton Delias Perangin Angin (05111940000181)
+2.  Cliffton Delias Perangin Angin (05111940000181)
 3.  Abdurrahman Fauzan Firmansyah (05111940000231)
 
 ### Soal
