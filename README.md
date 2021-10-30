@@ -7,6 +7,8 @@ Lapres Modul 2 Jaringan Komputer
 2.  Cliffton Delias Perangin Angin (05111940000181)
 3.  Abdurrahman Fauzan Firmansyah (05111940000231)
 
+Prefix IP kelompok kami adalah `10.28.x.x`
+
 ### Soal
 **1.  EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet**
 
